@@ -1,0 +1,27 @@
+해당 서버는 2개의 호스트 서버로 이루어진 시나리오 환경의 모의해킹 서버입니다.
+m@n@ger 디렉토리와 staging은 각각의 서버에 독립적으로 /opt/lampp/htdocs 하위에 올려주시면 됩니다.
+
+먼저 m@n@ger을 업로드 한 서버의 설정법입니다.
+root:NoBrut3
+ubuntu:QWERTY123456 으로 계정을 준비해주세요
+
+1. 웹 서버의 경우 m@n@ger 디렉토리를 /opt/lampp/htdocs/ 경로에 업로드 하면 끝입니다.
+2. m@n@ger 디렉토리 안에 있는 sql.txt 파일을 mysql에 붙여넣기 해주세요(Ctrl + A 눌러서 복붙)
+3. mysql의 패스워드는 자유롭게 설정해주시고 m@n@ger 아래 index.php에서 가장 상단 php 로그인 패스워드만 변경해주세요
+4. /etc/password/credentials.conf에		" username:root	password:NoBrut3 " 를 입력해주세요
+
+
+
+그 다음으로 staging 설정법입니다.
+root: 패스워드 무관
+ubuntu:패스워드 무관
+
+1. ubuntu 계정에는 ssh 공개키를 생성해주시고, 비밀키를 가진 사람은 패스워드 없이 로그인을 허가하도록 해주세요
+2. env 파일에 SUID 설정을 해서 권한상승을 할 수 있도록 해주세요
+3. ubuntu의 디렉토리 및 .ssh, id_rsa 경로에 대해 755 권한 설정을 해주세요
+4. /etc/hosts 파일에		"google.com	www.darksec.com/m@n@ger/xss_attack" 을 적어주세요
+5. /home/ubuntu 하위에 secret.txt 같은 시나리오 요소를 위한 파일을 몇개 뿌려주시면 완성입니다.(ex. 
+bob, I think a DarkSec member has infiltrated our systems. Check for backdoors and check the hosts file.)
+6. /staging/utils/common.php 의 패스워드를 mysql과 연동시켜주세요
+7. staging 디렉토리 하위의 sql.txt를 모두 복사하여 mysql에 설정해주세요
+

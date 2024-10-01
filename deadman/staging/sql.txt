@@ -1,0 +1,50 @@
+CREATE database acs;
+use acs;
+
+CREATE TABLE USERS (
+    idx INT AUTO_INCREMENT PRIMARY KEY,
+    id VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    hash VARCHAR(64) NOT NULL,
+    introduction TEXT,
+    profile TEXT
+);
+CREATE TABLE ADMINISTRATORS (
+    idx INT AUTO_INCREMENT PRIMARY KEY,
+    id VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    hash VARCHAR(64) NOT NULL
+);
+CREATE TABLE board (
+    idx INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    writer VARCHAR(50) NOT NULL,
+    content TEXT NOT NULL,
+    regdate DATETIME NOT NULL,
+    filename VARCHAR(255),
+    password VARCHAR(50) NOT NULL
+);
+CREATE TABLE comments (
+    idx INT(11) AUTO_INCREMENT PRIMARY KEY,
+    id VARCHAR(255) NOT NULL,
+    reg DATETIME NOT NULL DEFAULT current_timestamp(),
+    boardidx INT(11),
+    comment_text TEXT
+);
+CREATE TABLE review (
+    idx INT(11) AUTO_INCREMENT PRIMARY KEY,
+    content VARCHAR(255),
+    id VARCHAR(255)
+);
+
+
+INSERT INTO USERS (id, password, hash, introduction, profile) VALUES
+('CATCHMEIFYOUCAN', 'NoBruteForce', '235955a8afc35f052639bfd849a66015764a36b305e877edc4301af2a46e33bc', NULL, NULL);
+
+INSERT INTO ADMINISTRATORS (id, password, hash) VALUES
+('CATCHMEIFYOUCAN', 'NoBruteForce', 'cb0345e93387778bde9debfddffb9869378045907342d255243be83fa4cd0845');
+
+INSERT INTO board (title, writer, content, regdate, filename, password) VALUES
+('PHP 시큐어코딩 가이드라인 파일입니다.', 'CATCHMEIFYOUCAN', '첨부파일에 올려둔 시큐어코딩 가이드라인을 참고해주세요', '2024-05-21 18:12:17', 'secure.php', 'NoBruteForce'),
+('웹 사이트 공격 의심시 IP 차단됩니다.', 'CATCHMEIFYOUCAN', '악의적인 공격활동 감지시 IP차단 조치됩니다.', '2024-05-21 18:12:17', NULL, 'NoBruteForce'),
+('안녕하세요! 의뢰 드려도 될까요?', 'KimYeongHak', '보안 컨설팅 의뢰하고 싶습니다!!', '2024-05-21 18:12:17', NULL, 'KimYeongHak');
